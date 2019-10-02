@@ -1,0 +1,38 @@
+body {
+    width: 80%;
+    margin: auto;
+    text-align: justify;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;	
+    
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #6b6764;
+    padding: 2% 2% 5% 2%;
+    color: #eb8634;
+}
+
+.kjslogo {
+    max-width: 100%;
+    width: 175px;
+    height: 175px;
+}
+
+.head-inner {
+    text-align: right;
+}
+
+#main-header {
+    text-align: center;
+    color: #eb8634;
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
