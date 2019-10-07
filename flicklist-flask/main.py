@@ -1,4 +1,5 @@
 from flask import Flask
+from werkzeug.serving import run_simple
 import random
 
 app = Flask(__name__)
@@ -34,4 +35,5 @@ def get_random_movie():
     return movie_titles[rand_movie_idx]
 
 
-app.run()
+app.run(host='0.0.0.0',port=12345)
+
