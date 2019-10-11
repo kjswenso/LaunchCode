@@ -2,28 +2,32 @@
 <html>
 <head>
     <style>
-        input {display:block}
+        input {display:block;}
+        .error {color:red;}
     </style>
 </head>
 <body>
     <h1>Sign up</h1>
-    <form>
+    <form method="post">
         <label for="username">
             Username:
-            <input type="text" id="username" name="username" />
+            <input type="text" id="username" name="username" value="{{username}}" />
         </label>
+        <p class="error">{{username_invalid}}</p>
         <label for="password">
             Password:
-            <input type="text" id="password-init" name="password-init" />
+            <input type="password" id="password-init" name="password-init" value="" />
         </label>
+        <p class="error">{{password_invalid}}</p>
         <label for="password-verify">
             Verify Password:
-            <input type="text" id="password-verify" name="password-verify" />
+            <input type="password" id="password-verify" name="password-verify" value=""/>
         </label>
         <label for="email">
             Email (optional):
-            <input type="text" id="email" name="email" />
+            <input type="text" id="email" name="email" value="{{email}}"/>
         </label>
+        <p class="error">{{email_invalid}}</p>
         <input type="submit" />
     </form>
 </body>
