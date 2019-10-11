@@ -57,6 +57,8 @@ def validate_input():
         username_invalid = "Username must contain only alphanumeric and special characters"
     elif invalid_length(username):
         username_invalid = "Username must be between 3 and 20 characters"
+    else: 
+        username = username
 
     #password validation
     if isEmpty(password) or isEmpty(password_verify):
@@ -76,8 +78,15 @@ def validate_input():
         email_invalid = "email must be between 3 and 20 characters"
     elif not valid_email(email):
         email_invalid = "email is not valid. Please reenter"
+    else:
+        email = email
 
+    #welcome user or return errors
+    if not username_invalid and not password_invalid and not email_invalid:
+        welcome_msg = "Welcome, " + username + "!"
+        return render_template('welcome.html', welcome_msg = welcome_msg)
+    else:
+        return render_template('input.html', username=username, email=email, username_invalid=username_invalid, password_invalid=password_invalid, email_invalid=email_invalid)
 
-    return render_template('input.html', username_invalid=username_invalid, password_invalid=password_invalid, email_invalid=email_invalid)
 
 app.run()
