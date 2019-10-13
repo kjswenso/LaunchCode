@@ -11,10 +11,11 @@ class Task(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
+    completed = db.Column(db.Boolean)
 
     def __init__(self, name):
         self.name = name
-
+        self.completed = False
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -25,16 +26,20 @@ def index():
         db.session.add(new_task)
         db.session.commit()
 
-    tasks = Task.query.all()
+    tasks = Task.query.filter_by(completed = False).all()
+    completed_tasks = Task.query.filter_by(completed = True).all()
 
-    return render_template('todos.html', title="Get It Done!", tasks=tasks)
+    return render_template('todos.html', title="Get It Done!",
+        tasks=tasks, completed_tasks=completed_tasks)
 
 @app.route('/delete-task', methods=["POST"])
 def delete_task():
     task_id = int(request.form['task_id'])
     task = Task.query.get(task_id)
-    db.session.delete(task)
+    task.completed = True
+    db.session.add(task)
     db.session.commit()
+
 
     return redirect('/')
 
