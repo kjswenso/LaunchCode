@@ -10,40 +10,9 @@
         <a href="blog">Blog</a>
     </nav>
     
-    {% block create %}
-    <!--<h2>Create New Post</h2>
 
-    <form action="/" method="POST">
-        <label for="title">
-            Title
-            <input type="text" name="title" id="title" />
-        </label>
-        <label for="content">
-            Content
-            <textarea type="text" name="content" id="content"></textarea>
-        </label>
-        <input type="submit" value="Create Post" />
-    </form> -->
-
+    {% block content %}
     {% endblock %}
-    <hr />
-
-    {% block posts %}
-    <!--<h2>Blog Posts</h2>
     
-    {% if blogs|length == 0 %}
-    <p>No blogs yet</p>
-    {% else %}
-
-    <ul>
-        {% for blog in blogs %}
-        <li>{{blog.title}}</li>
-        <li>{{blog.body}}</li>
-        <hr />
-        {% endfor %}
-    </ul>
-    {% endif %}-->
-
-    {% endblock %}
 </body>
 </html>

@@ -27,13 +27,6 @@ def new_post():
     return render_template('newpost.html')
 
 @app.route('/blog', methods=['POST', 'GET'])
-def blog():
-
-    blogs = Blog.query.all()
-
-    return render_template('blog.html', blogs=blogs)
-
-@app.route('/', methods=['POST', 'GET'])
 def index():
 
     if request.method == 'POST':
@@ -43,7 +36,9 @@ def index():
         db.session.add(new_blog)
         db.session.commit()
 
-    return render_template('base.html')
+    blogs = Blog.query.all()
+
+    return render_template('blog.html', blogs=blogs)
 
 if __name__ == '__main__':
     app.run()
