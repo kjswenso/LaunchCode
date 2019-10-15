@@ -26,7 +26,8 @@ def new_post():
     
     return render_template('newpost.html')
 
-@app.route('/blog', methods=['POST', 'GET'])
+
+@app.route('/', methods=['POST', 'GET'])
 def index():
 
     if request.method == 'POST':
