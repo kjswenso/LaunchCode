@@ -19,27 +19,44 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
+    def isValid(self):
+        if self.title and self.body:
+            return True
+        else:
+            return False
 
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
-    
-    return render_template('newpost.html')
-
-
-@app.route('/', methods=['POST', 'GET'])
-def index():
 
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['content']
         new_blog = Blog(title, body)
-        db.session.add(new_blog)
-        db.session.commit()
 
+        if new_blog.isValid():
+            db.session.add(new_blog)
+            db.session.commit() 
+            return redirect('/blog')
+
+        else:
+            flash("Please provide all content", 'error')
+            return render_template('newpost.html', title=title, body=body)
+
+    else:
+        return render_template('newpost.html')
+
+@app.route('/blog')
+def blog_listing():
+   
     blogs = Blog.query.all()
 
     return render_template('blog.html', blogs=blogs)
+
+@app.route('/', methods=['POST', 'GET'])
+def index():
+
+    return redirect('/blog')
 
 if __name__ == '__main__':
     app.run()

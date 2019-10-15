@@ -4,14 +4,14 @@
 
 <h2>Create Blog Post</h2>
 
-<form action="/" method="POST">
+<form action="/newpost" method="POST">
     <label for="title">
         Title
-        <input type="text" name="title" id="title" />
+        <input type="text" name="title" id="title" value="{{ title }}"/>
     </label>
     <label for="content">
         Content
-        <textarea type="text" name="content" id="content"></textarea>
+        <textarea type="text" name="content" id="content" value="{{ body }}"></textarea>
     </label>
     <input type="submit" value="Create Post" />
 </form>
