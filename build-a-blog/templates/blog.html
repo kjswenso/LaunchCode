@@ -8,14 +8,14 @@
     <p>No blogs yet</p>
     {% else %}
 
-    <ul>
-        {% for blog in blogs %}
-        <li>{{blog.title}}</li>
-        <li>{{blog.body}}</li>
-        <hr />
-        {% endfor %}
+    
+    {% for blog in blogs %}
+    <h3><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h3>
+    <article>{{blog.body}}</article>
+    <hr />
+    {% endfor %}
 
-    </ul>
+
  {% endif %}
 
 {% endblock %}

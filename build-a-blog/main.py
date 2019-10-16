@@ -37,7 +37,7 @@ def new_post():
         if new_blog.isValid():
             db.session.add(new_blog)
             db.session.commit() 
-            return redirect('/blog')
+            return redirect('/blog?id=' + str(new_blog.id))
 
         else:
             flash("Please provide all content", 'error')
@@ -48,9 +48,14 @@ def new_post():
 
 @app.route('/blog')
 def blog_listing():
-   
-    blogs = Blog.query.all()
 
+    blog_id = request.args.get('id')
+
+    if blog_id:
+        blog = Blog.query.get(blog_id)
+        return render_template('entry.html', blog=blog)
+
+    blogs = Blog.query.all()
     return render_template('blog.html', blogs=blogs)
 
 @app.route('/', methods=['POST', 'GET'])
