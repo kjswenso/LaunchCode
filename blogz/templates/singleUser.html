@@ -2,8 +2,8 @@
 
 {% block content %}
 
+<h1>{{blog.owner.email}}</h1>
     {% for blog in blogs %}
-    <h1>{{blog.owner.email}}</h1>
     <h2>{{blog.title}}</h2>
     <article>{{blog.body}}</article>
     {% endfor %}
