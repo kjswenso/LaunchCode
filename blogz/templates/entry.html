@@ -2,10 +2,8 @@
 
 {% block content %}
 
-    {% for blog in blogs %}
-    <h1>{{blog.owner.email}}</h1>
     <h2>{{blog.title}}</h2>
+    <p>Written by: <a href="/blog?user={{blog.owner.id}}">{{blog.owner.email}}</a></p>
     <article>{{blog.body}}</article>
-    {% endfor %}
 
 {% endblock %}

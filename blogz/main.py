@@ -76,9 +76,17 @@ def signup():
             db.session.commit()
             session['email'] = email
             return redirect('/newpost')
-        else: 
+        elif not email and not password and not verify:
+            flash("All fields must be complete") 
+        elif existing_user:
+            flash("User already exists")
+        elif password != verify:
+            flash("Passwords do not match")
+        elif len(password) < 3 or len(password) > 20:
+            flash("Password must be between 3 and 20 characters")
+        elif len(email) < 3 or len(email) > 20:
+            flash("Password must be between 3 and 20 characters")
               
-            return '<h1>Duplicate user</h1>'
 
     return render_template('signup.html')
 
@@ -115,7 +123,7 @@ def blog_listing():
         user_id = request.args.get('user')
         user = User.query.get(user_id)
         blogs = Blog.query.filter_by(owner=user).all()
-        return render_template('singleUser.html', blogs=blogs)
+        return render_template('singleUser.html', blogs=blogs, user=user)
 
     blogs = Blog.query.all()
     return render_template('blog.html', blogs=blogs)
@@ -127,6 +135,13 @@ def logout():
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+        
+    if request.args.get('id'):
+        user_id = request.args.get('id')
+        user = User.query.get(user_id)
+        blogs = Blog.query.filter_by(owner=user).all()
+        return render_template('singleUser.html', blogs=blogs, user=user)
+
     authors = User.query.all()
     return render_template('index.html', authors=authors)
 
